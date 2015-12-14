@@ -23,5 +23,5 @@ public class TreeRunner {
 //     +
 //   /   + 
 // 8 +   1 2
-//  4 2
+//  4  2
    

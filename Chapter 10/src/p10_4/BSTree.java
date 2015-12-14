@@ -21,8 +21,9 @@ public class BSTree
 			addNode(root, newNode);
 	}
 	
-	private boolean isOperator (String x)
+	private boolean isOperator (TreeNode y)
 	{
+		String x = y.getValue();
 		if(x.equals("+") || x.equals("-") || x.equals("/") || x.equals("*"))
 			return true;
 		return false;
@@ -30,11 +31,40 @@ public class BSTree
 	
 	private void addNode(TreeNode current, BSTNode newNode)
 	{
+		//System.out.println("Current: " + current.getValue());
 	
+		if(current.getLeft() == null)
+			current.setLeft(newNode);
+		
+		else if(current.getRight() == null)
+			current.setRight(newNode);
+		
+		else
+		{
+			if(current.getLeft() != null)
+			{
+				if(isOperator(current.getLeft()))
+				{
+					addNode(current.getLeft(), newNode);
+			
+				}
+			}
+			
+				//s += postOrder(current.getLeft()) + "\n";
+			
+			if(current.getRight() != null)
+			{
+				if(isOperator(current.getRight()))
+				{
+					addNode(current.getRight(), newNode);
+					//postOrder(current.getRight());
+				}
+			}
+		}
 		//if(((Comparable) newNode.getValue()).compareTo(current.getValue()) < 0)
 		//{
 		
-		if(current != null && isOperator(current.getValue()))
+		/*if(current != null && isOperator(current.getValue()))
 		{
 		
 		//why no work
@@ -51,7 +81,8 @@ public class BSTree
 			else if(isOperator(current.getRight().getValue()))
 				addNode((BSTNode)current.getRight(), newNode);
 			
-		}
+		}*/
+		
 		//}
 		/*else
 			if(current.getRight() != null && isOperator(current.getValue()))
@@ -94,7 +125,7 @@ public class BSTree
 		return s;
 	}
 	
-	private String postOrder(TreeNode current)
+	/*private String postOrder(TreeNode current)
 	{
 		String s = "";
 		
@@ -109,6 +140,37 @@ public class BSTree
 		s += current.getValue();
 		
 		return s;
+	
+	}*/
+	
+	private String postOrder(TreeNode current)
+	{
+		//String s = "";
+		
+		
+		
+		if(current.getLeft() != null)
+		{
+			if(isOperator(current.getLeft()))
+			{
+				postOrder(current.getLeft());
+			}
+		}
+		
+			//s += postOrder(current.getLeft()) + "\n";
+		
+		if(current.getRight() != null)
+		{
+			if(isOperator(current.getRight()))
+			{
+				postOrder(current.getRight());
+			}
+		}
+			//s += postOrder(current.getRight()) + "\n";
+		
+		//s += current.getValue();
+		
+		return "";
 	
 	}
 	
